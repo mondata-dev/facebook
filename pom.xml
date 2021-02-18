@@ -20,7 +20,7 @@
 
   <groupId>io.cdap.plugin</groupId>
   <artifactId>facebook-ads</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Facebook ADS Plugins</name>
@@ -254,7 +254,7 @@
     <dependency>
       <groupId>com.facebook.business.sdk</groupId>
       <artifactId>facebook-java-business-sdk</artifactId>
-      <version>7.2.0</version>
+      <version>9.0.0</version>
       <exclusions>
         <exclusion>
           <groupId>com.squareup.okhttp3</groupId>
@@ -342,7 +342,7 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.5.0</version>
         <extensions>true</extensions>
         <configuration>
           <instructions>
