@@ -58,7 +58,9 @@ public class FacebookBatchSourceConfig extends BaseSourceConfig {
     this.adSetId = builder.adSetId;
     this.campaignId = builder.campaignId;
     this.accountId = builder.accountId;
+    this.pageId = builder.pageId;
     this.fields = builder.fields;
+    this.metrics = builder.metrics;
     this.level = builder.level;
     this.filtering = builder.filtering;
     this.datePreset = builder.datePreset;
@@ -118,7 +120,9 @@ public class FacebookBatchSourceConfig extends BaseSourceConfig {
     private String adSetId;
     private String campaignId;
     private String accountId;
+    private String pageId;
     private String fields;
+    private String metrics;
     private String level;
     private String filtering;
     private String datePreset;
@@ -174,8 +178,18 @@ public class FacebookBatchSourceConfig extends BaseSourceConfig {
       return this;
     }
 
+    public Builder setPageId(String pageId) {
+      this.pageId = pageId;
+      return this;
+    }
+
     public Builder setFields(String fields) {
       this.fields = fields;
+      return this;
+    }
+
+    public Builder setMetrics(String metrics) {
+      this.metrics = metrics;
       return this;
     }
 

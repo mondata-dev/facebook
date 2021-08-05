@@ -46,7 +46,10 @@ public class BaseSourceConfig extends ReferencePluginConfig {
   public static final String PROPERTY_AD_SET_ID = "adSetId";
   public static final String PROPERTY_CAMPAIGN_ID = "campaignId";
   public static final String PROPERTY_ACCOUNT_ID = "accountId";
+  public static final String PROPERTY_PAGE_ID = "pageId";
   public static final String PROPERTY_FIELDS = "fields";
+  public static final String PROPERTY_METRICS = "metrics";
+  public static final String PROPERTY_PERIOD = "period";
   public static final String PROPERTY_LEVEL = "level";
   public static final String PROPERTY_FILTERING = "filtering";
   public static final String PROPERTY_DATE_PRESET = "datePreset";
@@ -87,10 +90,28 @@ public class BaseSourceConfig extends ReferencePluginConfig {
   @Nullable
   protected String accountId;
 
+  @Name(PROPERTY_PAGE_ID)
+  @Description("Page Id.")
+  @Macro
+  @Nullable
+  protected String pageId;
+
   @Name(PROPERTY_FIELDS)
   @Description("Fields to get.")
   @Macro
+  @Nullable
   protected String fields;
+
+  @Name(PROPERTY_METRICS)
+  @Description("Metrics to get.")
+  @Macro
+  @Nullable
+  protected String metrics;
+
+  @Name(PROPERTY_PERIOD)
+  @Description("Period to get metric for.")
+  @Macro
+  protected String period;
 
   @Name(PROPERTY_LEVEL)
   @Description("Level of request.")
@@ -142,7 +163,7 @@ public class BaseSourceConfig extends ReferencePluginConfig {
 
   /**
    * Returns the object id depending on the object type set.
-   * @return The string value of either campaignId / AdId / adSetId / accountId
+   * @return The string value of either campaignId / AdId / adSetId / accountId / pageId
    */
   public String getObjectId() {
     switch (getObjectType()) {
@@ -154,6 +175,8 @@ public class BaseSourceConfig extends ReferencePluginConfig {
         return adSetId;
       case Account:
         return accountId;
+      case Page:
+        return pageId;
       default:
         throw new IllegalArgumentException("Unknown object type");
     }
@@ -172,12 +195,38 @@ public class BaseSourceConfig extends ReferencePluginConfig {
   }
 
   /**
+   * Returns list of metric names.
+   * 
+   * @return the list of metrics
+   */
+  public List<String> getMetrics() {
+    if (!Strings.isNullOrEmpty(metrics)) {
+      return Arrays.asList(metrics.split(","));
+    } else {
+      return Collections.emptyList();
+    }
+  }
+
+  /**
+   * Returns selected period.
+   * 
+   * @return the period
+   */
+  public String getPeriod() {
+    return period;
+  }
+  
+  /**
    * Returns selected Schema.
    * @return instance of Schema
    */
   public Schema getSchema() {
     if (schema == null) {
-      schema = SchemaHelper.buildSchema(getFields(), getBreakdown());
+      if (getObjectType() != ObjectType.Page) {
+        schema = SchemaHelper.buildAdsInsightsSchema(getFields(), getBreakdown());
+      } else {
+        schema = SchemaHelper.buildInsightsResultSchema(getMetrics());
+      }
     }
     return schema;
   }
@@ -254,14 +303,14 @@ public class BaseSourceConfig extends ReferencePluginConfig {
         failureCollector
           .addFailure(
             ex.getMessage(),
-            "Choose one of 'Campaign', 'Ad', 'Ad Set' or 'Account'.")
+            "Choose one of 'Campaign', 'Ad', 'Ad Set', 'Account', or 'Page'.")
           .withConfigProperty(PROPERTY_OBJECT_TYPE);
       }
     }
 
     validateObjectId(failureCollector);
     validateBreakdowns(failureCollector);
-    validateFields(failureCollector);
+    validateFieldsAndMetrics(failureCollector);
     validateFiltering(failureCollector);
     validateDatePreset(failureCollector);
   }
@@ -297,26 +346,44 @@ public class BaseSourceConfig extends ReferencePluginConfig {
               .withConfigProperty(PROPERTY_ACCOUNT_ID);
           }
           break;
+        case Page:
+          if (!containsMacro(PROPERTY_PAGE_ID) && Strings.isNullOrEmpty(pageId)) {
+            failureCollector.addFailure("Page Id must be not empty.", "Enter valid Page Id.")
+                .withConfigProperty(PROPERTY_PAGE_ID);
+          }
+          break;
       }
     }
   }
 
-  void validateFields(FailureCollector failureCollector) {
-    if (!containsMacro(PROPERTY_FIELDS)) {
-      if (Strings.isNullOrEmpty(fields) && getFields().size() == 0) {
+  void validateFieldsAndMetrics(FailureCollector failureCollector) {
+    if (!containsMacro(PROPERTY_FIELDS) && !containsMacro(PROPERTY_METRICS)) {
+      if (Strings.isNullOrEmpty(fields) && getFields().size() == 0
+        && Strings.isNullOrEmpty(metrics) && getMetrics().size() == 0) {
         failureCollector
-          .addFailure("At least one field must be specified.", "Specify valid fields.")
-          .withConfigProperty(PROPERTY_FIELDS);
+          .addFailure("At least one field or metric must be specified.", "Specify valid fields or metrics.")
+          .withConfigProperty(PROPERTY_FIELDS)
+          .withConfigProperty(PROPERTY_METRICS);
       } else {
-        getFields().forEach(field -> {
-          try {
-            SchemaHelper.fromName(field);
-          } catch (IllegalInsightsFieldException ex) {
-            failureCollector
-              .addFailure("Invalid field:" + ex.getFieldName(), "Remove invalid field.")
-              .withConfigElement(PROPERTY_FIELDS, ex.getFieldName());
-          }
-        });
+        if (containsMacro(PROPERTY_FIELDS)) {
+          getFields().forEach(field -> {
+            try {
+              SchemaHelper.fromName(field);
+            } catch (IllegalInsightsFieldException ex) {
+              failureCollector.addFailure("Invalid field:" + ex.getFieldName(), "Remove invalid field.")
+                  .withConfigElement(PROPERTY_FIELDS, ex.getFieldName());
+            }
+          });
+        } else {
+          getMetrics().forEach(metric -> {
+            try {
+              SchemaHelper.fromMetricName(metric);
+            } catch (IllegalInsightsFieldException ex) {
+              failureCollector.addFailure("Invalid metric:" + ex.getFieldName(), "Remove invalid metric.")
+                  .withConfigElement(PROPERTY_METRICS, ex.getFieldName());
+            }
+          });
+        }
       }
     }
   }

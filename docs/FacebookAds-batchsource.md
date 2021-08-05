@@ -15,11 +15,13 @@ Properties
 ### Object query parameters
 **Object Type:** Object type that represented by **Object Id**.
 
-**Campaign ID/Ad Set ID/Ad ID/Account ID:** Object identifier in Facebook API.
+**Campaign ID/Ad Set ID/Ad ID/Account ID:/Page ID** Object identifier in Facebook API.
 
 **Level:** Query level
 
-**Fields:** Fields to be queried.
+**Fields:** Fields to be queried (AdsInsights).
+
+**Metrics:** Metrics to be queried (Page Insights).
 
 **Breakdown:** Breakdown to be applied to query.
 

@@ -33,6 +33,8 @@ import io.cdap.cdap.etl.api.batch.BatchSourceContext;
 import io.cdap.plugin.common.IdUtils;
 import io.cdap.plugin.common.LineageRecorder;
 import io.cdap.plugin.facebook.source.common.AdsInsightsTransformer;
+import io.cdap.plugin.facebook.source.common.InsightsType;
+
 import org.apache.hadoop.io.NullWritable;
 
 import java.util.stream.Collectors;
@@ -43,7 +45,7 @@ import java.util.stream.Collectors;
 @Plugin(type = BatchSource.PLUGIN_TYPE)
 @Name(FacebookBatchSource.NAME)
 @Description("Reads data from Facebook Insights API.")
-public class FacebookBatchSource extends BatchSource<NullWritable, AdsInsights, StructuredRecord> {
+public class FacebookBatchSource extends BatchSource<NullWritable, InsightsType, StructuredRecord> {
   public static final String NAME = "FacebookAds";
 
   private final FacebookBatchSourceConfig config;
@@ -73,7 +75,7 @@ public class FacebookBatchSource extends BatchSource<NullWritable, AdsInsights, 
   }
 
   @Override
-  public void transform(KeyValue<NullWritable, AdsInsights> input, Emitter<StructuredRecord> emitter) {
+  public void transform(KeyValue<NullWritable, InsightsType> input, Emitter<StructuredRecord> emitter) {
     emitter.emit(AdsInsightsTransformer.transform(input.getValue(), config.getSchema()));
   }
 

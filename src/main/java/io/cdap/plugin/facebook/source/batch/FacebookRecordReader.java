@@ -19,8 +19,11 @@ package io.cdap.plugin.facebook.source.batch;
 import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.APINodeList;
 import com.facebook.ads.sdk.AdsInsights;
+import com.facebook.ads.sdk.InsightsResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import io.cdap.plugin.facebook.source.common.InsightsType;
 import io.cdap.plugin.facebook.source.common.requests.InsightsRequest;
 import io.cdap.plugin.facebook.source.common.requests.InsightsRequestFactory;
 import org.apache.hadoop.conf.Configuration;
@@ -36,11 +39,11 @@ import java.util.Iterator;
  * RecordReader implementation, which reads {@link AdsInsights} instances from Facebook Insights using
  * facebook-java-business-sdk.
  */
-public class FacebookRecordReader extends RecordReader<NullWritable, AdsInsights> {
+public class FacebookRecordReader extends RecordReader<NullWritable, InsightsType> {
   private static final Gson gson = new GsonBuilder().create();
-  private APINodeList<AdsInsights> currentPage;
-  private Iterator<AdsInsights> currentPageIterator;
-  private AdsInsights currentInsight;
+  private APINodeList<?> currentPage;
+  private Iterator<?> currentPageIterator;
+  private InsightsType currentInsight;
 
   @Override
   public void initialize(InputSplit inputSplit, TaskAttemptContext taskAttemptContext) throws IOException {
@@ -67,7 +70,7 @@ public class FacebookRecordReader extends RecordReader<NullWritable, AdsInsights
     if (!currentPageIterator.hasNext()) {
       try {
         // switch page
-        APINodeList<AdsInsights> nextPage = currentPage.nextPage();
+        APINodeList<?> nextPage = currentPage.nextPage();
         if (nextPage != null) {
           currentPage = nextPage;
           currentPageIterator = currentPage.iterator();
@@ -78,7 +81,16 @@ public class FacebookRecordReader extends RecordReader<NullWritable, AdsInsights
       }
       return false;
     } else {
-      currentInsight = currentPageIterator.next();
+      Object currentObject = currentPageIterator.next();
+
+      if (currentObject instanceof AdsInsights) {
+        currentInsight = new InsightsType((AdsInsights) currentObject);
+      } else if (currentObject instanceof InsightsResult) {
+        currentInsight = new InsightsType((InsightsResult) currentObject);
+      } else {
+        throw new IOException("Invalid insight type");
+      }
+
       return true;
     }
   }
@@ -89,7 +101,7 @@ public class FacebookRecordReader extends RecordReader<NullWritable, AdsInsights
   }
 
   @Override
-  public AdsInsights getCurrentValue() {
+  public InsightsType getCurrentValue() {
     return currentInsight;
   }
 

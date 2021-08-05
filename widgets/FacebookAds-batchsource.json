@@ -31,7 +31,8 @@
               "Campaign",
               "Ad",
               "Ad Set",
-              "Account"
+              "Account",
+              "Page"
             ]
           }
         },
@@ -56,6 +57,11 @@
           "widget-type": "textbox"
         },
         {
+          "name": "pageId",
+          "label": "Page Id",
+          "widget-type": "textbox"
+        },
+        {
           "label": "Level",
           "name": "level",
           "widget-type": "select",
@@ -66,6 +72,7 @@
               "adset",
               "campaign",
               "account",
+              "page",
               "default"
             ]
           }
@@ -1038,6 +1045,901 @@
           }
         },
         {
+          "name": "metrics",
+          "label": "Metrics",
+          "widget-type": "multi-select",
+          "widget-attributes": {
+            "delimiter": ",",
+            "options": [
+              {
+                "id": "page_tab_views_login_top_unique",
+                "label": "page_tab_views_login_top_unique"
+              },
+              {
+                "id": "page_tab_views_login_top",
+                "label": "page_tab_views_login_top"
+              },
+              {
+                "id": "page_tab_views_logout_top",
+                "label": "page_tab_views_logout_top"
+              },
+              {
+                "id": "page_total_actions",
+                "label": "page_total_actions"
+              },
+              {
+                "id": "page_cta_clicks_logged_in_total",
+                "label": "page_cta_clicks_logged_in_total"
+              },
+              {
+                "id": "page_cta_clicks_logged_in_unique",
+                "label": "page_cta_clicks_logged_in_unique"
+              },
+              {
+                "id": "page_cta_clicks_by_site_logged_in_unique",
+                "label": "page_cta_clicks_by_site_logged_in_unique"
+              },
+              {
+                "id": "page_cta_clicks_by_age_gender_logged_in_unique",
+                "label": "page_cta_clicks_by_age_gender_logged_in_unique"
+              },
+              {
+                "id": "page_cta_clicks_logged_in_by_country_unique",
+                "label": "page_cta_clicks_logged_in_by_country_unique"
+              },
+              {
+                "id": "page_cta_clicks_logged_in_by_city_unique",
+                "label": "page_cta_clicks_logged_in_by_city_unique"
+              },
+              {
+                "id": "page_call_phone_clicks_logged_in_unique",
+                "label": "page_call_phone_clicks_logged_in_unique"
+              },
+              {
+                "id": "page_call_phone_clicks_by_age_gender_logged_in_unique",
+                "label": "page_call_phone_clicks_by_age_gender_logged_in_unique"
+              },
+              {
+                "id": "page_call_phone_clicks_logged_in_by_country_unique",
+                "label": "page_call_phone_clicks_logged_in_by_country_unique"
+              },
+              {
+                "id": "page_call_phone_clicks_logged_in_by_city_unique",
+                "label": "page_call_phone_clicks_logged_in_by_city_unique"
+              },
+              {
+                "id": "page_call_phone_clicks_by_site_logged_in_unique",
+                "label": "page_call_phone_clicks_by_site_logged_in_unique"
+              },
+              {
+                "id": "page_get_directions_clicks_logged_in_unique",
+                "label": "page_get_directions_clicks_logged_in_unique"
+              },
+              {
+                "id": "page_get_directions_clicks_by_age_gender_logged_in_unique",
+                "label": "page_get_directions_clicks_by_age_gender_logged_in_unique"
+              },
+              {
+                "id": "page_get_directions_clicks_logged_in_by_country_unique",
+                "label": "page_get_directions_clicks_logged_in_by_country_unique"
+              },
+              {
+                "id": "page_get_directions_clicks_logged_in_by_city_unique",
+                "label": "page_get_directions_clicks_logged_in_by_city_unique"
+              },
+              {
+                "id": "page_get_directions_clicks_by_site_logged_in_unique",
+                "label": "page_get_directions_clicks_by_site_logged_in_unique"
+              },
+              {
+                "id": "page_website_clicks_logged_in_unique",
+                "label": "page_website_clicks_logged_in_unique"
+              },
+              {
+                "id": "page_website_clicks_by_age_gender_logged_in_unique",
+                "label": "page_website_clicks_by_age_gender_logged_in_unique"
+              },
+              {
+                "id": "page_website_clicks_logged_in_by_country_unique",
+                "label": "page_website_clicks_logged_in_by_country_unique"
+              },
+              {
+                "id": "page_website_clicks_logged_in_by_city_unique",
+                "label": "page_website_clicks_logged_in_by_city_unique"
+              },
+              {
+                "id": "page_website_clicks_by_site_logged_in_unique",
+                "label": "page_website_clicks_by_site_logged_in_unique"
+              },
+              {
+                "id": "page_engaged_users",
+                "label": "page_engaged_users"
+              },
+              {
+                "id": "page_post_engagements",
+                "label": "page_post_engagements"
+              },
+              {
+                "id": "page_consumptions",
+                "label": "page_consumptions"
+              },
+              {
+                "id": "page_consumptions_unique",
+                "label": "page_consumptions_unique"
+              },
+              {
+                "id": "page_consumptions_by_consumption_type",
+                "label": "page_consumptions_by_consumption_type"
+              },
+              {
+                "id": "page_consumptions_by_consumption_type_unique",
+                "label": "page_consumptions_by_consumption_type_unique"
+              },
+              {
+                "id": "page_places_checkin_total",
+                "label": "page_places_checkin_total"
+              },
+              {
+                "id": "page_places_checkin_total_unique",
+                "label": "page_places_checkin_total_unique"
+              },
+              {
+                "id": "page_places_checkin_mobile",
+                "label": "page_places_checkin_mobile"
+              },
+              {
+                "id": "page_places_checkin_mobile_unique",
+                "label": "page_places_checkin_mobile_unique"
+              },
+              {
+                "id": "page_places_checkins_by_age_gender",
+                "label": "page_places_checkins_by_age_gender"
+              },
+              {
+                "id": "page_places_checkins_by_locale",
+                "label": "page_places_checkins_by_locale"
+              },
+              {
+                "id": "page_places_checkins_by_country",
+                "label": "page_places_checkins_by_country"
+              },
+              {
+                "id": "page_negative_feedback",
+                "label": "page_negative_feedback"
+              },
+              {
+                "id": "page_negative_feedback_unique",
+                "label": "page_negative_feedback_unique"
+              },
+              {
+                "id": "page_negative_feedback_by_type",
+                "label": "page_negative_feedback_by_type"
+              },
+              {
+                "id": "page_negative_feedback_by_type_unique",
+                "label": "page_negative_feedback_by_type_unique"
+              },
+              {
+                "id": "page_positive_feedback_by_type",
+                "label": "page_positive_feedback_by_type"
+              },
+              {
+                "id": "page_positive_feedback_by_type_unique",
+                "label": "page_positive_feedback_by_type_unique"
+              },
+              {
+                "id": "page_fans_online",
+                "label": "page_fans_online"
+              },
+              {
+                "id": "page_fans_online_per_day",
+                "label": "page_fans_online_per_day"
+              },
+              {
+                "id": "page_fan_adds_by_paid_non_paid_unique",
+                "label": "page_fan_adds_by_paid_non_paid_unique"
+              },
+              {
+                "id": "page_impressions",
+                "label": "page_impressions"
+              },
+              {
+                "id": "page_impressions_unique",
+                "label": "page_impressions_unique"
+              },
+              {
+                "id": "page_impressions_paid",
+                "label": "page_impressions_paid"
+              },
+              {
+                "id": "page_impressions_paid_unique",
+                "label": "page_impressions_paid_unique"
+              },
+              {
+                "id": "page_impressions_organic",
+                "label": "page_impressions_organic"
+              },
+              {
+                "id": "page_impressions_organic_unique",
+                "label": "page_impressions_organic_unique"
+              },
+              {
+                "id": "page_impressions_viral",
+                "label": "page_impressions_viral"
+              },
+              {
+                "id": "page_impressions_viral_unique",
+                "label": "page_impressions_viral_unique"
+              },
+              {
+                "id": "page_impressions_nonviral",
+                "label": "page_impressions_nonviral"
+              },
+              {
+                "id": "page_impressions_nonviral_unique",
+                "label": "page_impressions_nonviral_unique"
+              },
+              {
+                "id": "page_impressions_by_story_type",
+                "label": "page_impressions_by_story_type"
+              },
+              {
+                "id": "page_impressions_by_story_type_unique",
+                "label": "page_impressions_by_story_type_unique"
+              },
+              {
+                "id": "page_impressions_by_city_unique",
+                "label": "page_impressions_by_city_unique"
+              },
+              {
+                "id": "page_impressions_by_country_unique",
+                "label": "page_impressions_by_country_unique"
+              },
+              {
+                "id": "page_impressions_by_locale_unique",
+                "label": "page_impressions_by_locale_unique"
+              },
+              {
+                "id": "page_impressions_by_age_gender_unique",
+                "label": "page_impressions_by_age_gender_unique"
+              },
+              {
+                "id": "page_impressions_frequency_distribution",
+                "label": "page_impressions_frequency_distribution"
+              },
+              {
+                "id": "page_impressions_viral_frequency_distribution",
+                "label": "page_impressions_viral_frequency_distribution"
+              },
+              {
+                "id": "page_posts_impressions",
+                "label": "page_posts_impressions"
+              },
+              {
+                "id": "page_posts_impressions_unique",
+                "label": "page_posts_impressions_unique"
+              },
+              {
+                "id": "page_posts_impressions_paid",
+                "label": "page_posts_impressions_paid"
+              },
+              {
+                "id": "page_posts_impressions_paid_unique",
+                "label": "page_posts_impressions_paid_unique"
+              },
+              {
+                "id": "page_posts_impressions_organic",
+                "label": "page_posts_impressions_organic"
+              },
+              {
+                "id": "page_posts_impressions_organic_unique",
+                "label": "page_posts_impressions_organic_unique"
+              },
+              {
+                "id": "page_posts_served_impressions_organic_unique",
+                "label": "page_posts_served_impressions_organic_unique"
+              },
+              {
+                "id": "page_posts_impressions_viral",
+                "label": "page_posts_impressions_viral"
+              },
+              {
+                "id": "page_posts_impressions_viral_unique",
+                "label": "page_posts_impressions_viral_unique"
+              },
+              {
+                "id": "page_posts_impressions_nonviral",
+                "label": "page_posts_impressions_nonviral"
+              },
+              {
+                "id": "page_posts_impressions_nonviral_unique",
+                "label": "page_posts_impressions_nonviral_unique"
+              },
+              {
+                "id": "page_posts_impressions_frequency_distribution",
+                "label": "page_posts_impressions_frequency_distribution"
+              },
+              {
+                "id": "post_engaged_users",
+                "label": "post_engaged_users"
+              },
+              {
+                "id": "post_negative_feedback",
+                "label": "post_negative_feedback"
+              },
+              {
+                "id": "post_negative_feedback_unique",
+                "label": "post_negative_feedback_unique"
+              },
+              {
+                "id": "post_negative_feedback_by_type",
+                "label": "post_negative_feedback_by_type"
+              },
+              {
+                "id": "post_negative_feedback_by_type_unique",
+                "label": "post_negative_feedback_by_type_unique"
+              },
+              {
+                "id": "post_engaged_fan",
+                "label": "post_engaged_fan"
+              },
+              {
+                "id": "post_clicks",
+                "label": "post_clicks"
+              },
+              {
+                "id": "post_clicks_unique",
+                "label": "post_clicks_unique"
+              },
+              {
+                "id": "post_clicks_by_type",
+                "label": "post_clicks_by_type"
+              },
+              {
+                "id": "post_clicks_by_type_unique",
+                "label": "post_clicks_by_type_unique"
+              },
+              {
+                "id": "post_impressions",
+                "label": "post_impressions"
+              },
+              {
+                "id": "post_impressions_unique",
+                "label": "post_impressions_unique"
+              },
+              {
+                "id": "post_impressions_paid",
+                "label": "post_impressions_paid"
+              },
+              {
+                "id": "post_impressions_paid_unique",
+                "label": "post_impressions_paid_unique"
+              },
+              {
+                "id": "post_impressions_fan",
+                "label": "post_impressions_fan"
+              },
+              {
+                "id": "post_impressions_fan_unique",
+                "label": "post_impressions_fan_unique"
+              },
+              {
+                "id": "post_impressions_fan_paid",
+                "label": "post_impressions_fan_paid"
+              },
+              {
+                "id": "post_impressions_fan_paid_unique",
+                "label": "post_impressions_fan_paid_unique"
+              },
+              {
+                "id": "post_impressions_organic",
+                "label": "post_impressions_organic"
+              },
+              {
+                "id": "post_impressions_organic_unique",
+                "label": "post_impressions_organic_unique"
+              },
+              {
+                "id": "post_impressions_viral",
+                "label": "post_impressions_viral"
+              },
+              {
+                "id": "post_impressions_viral_unique",
+                "label": "post_impressions_viral_unique"
+              },
+              {
+                "id": "post_impressions_nonviral",
+                "label": "post_impressions_nonviral"
+              },
+              {
+                "id": "post_impressions_nonviral_unique",
+                "label": "post_impressions_nonviral_unique"
+              },
+              {
+                "id": "post_impressions_by_story_type",
+                "label": "post_impressions_by_story_type"
+              },
+              {
+                "id": "post_impressions_by_story_type_unique",
+                "label": "post_impressions_by_story_type_unique"
+              },
+              {
+                "id": "post_reactions_like_total",
+                "label": "post_reactions_like_total"
+              },
+              {
+                "id": "post_reactions_love_total",
+                "label": "post_reactions_love_total"
+              },
+              {
+                "id": "post_reactions_wow_total",
+                "label": "post_reactions_wow_total"
+              },
+              {
+                "id": "post_reactions_haha_total",
+                "label": "post_reactions_haha_total"
+              },
+              {
+                "id": "post_reactions_sorry_total",
+                "label": "post_reactions_sorry_total"
+              },
+              {
+                "id": "post_reactions_anger_total",
+                "label": "post_reactions_anger_total"
+              },
+              {
+                "id": "post_reactions_by_type_total",
+                "label": "post_reactions_by_type_total"
+              },
+              {
+                "id": "page_actions_post_reactions_like_total",
+                "label": "page_actions_post_reactions_like_total"
+              },
+              {
+                "id": "page_actions_post_reactions_love_total",
+                "label": "page_actions_post_reactions_love_total"
+              },
+              {
+                "id": "page_actions_post_reactions_wow_total",
+                "label": "page_actions_post_reactions_wow_total"
+              },
+              {
+                "id": "page_actions_post_reactions_haha_total",
+                "label": "page_actions_post_reactions_haha_total"
+              },
+              {
+                "id": "page_actions_post_reactions_sorry_total",
+                "label": "page_actions_post_reactions_sorry_total"
+              },
+              {
+                "id": "page_actions_post_reactions_anger_total",
+                "label": "page_actions_post_reactions_anger_total"
+              },
+              {
+                "id": "page_actions_post_reactions_total",
+                "label": "page_actions_post_reactions_total"
+              },
+              {
+                "id": "page_fans",
+                "label": "page_fans"
+              },
+              {
+                "id": "page_fans_locale",
+                "label": "page_fans_locale"
+              },
+              {
+                "id": "page_fans_city",
+                "label": "page_fans_city"
+              },
+              {
+                "id": "page_fans_country",
+                "label": "page_fans_country"
+              },
+              {
+                "id": "page_fans_gender_age",
+                "label": "page_fans_gender_age"
+              },
+              {
+                "id": "page_fan_adds",
+                "label": "page_fan_adds"
+              },
+              {
+                "id": "page_fan_adds_unique",
+                "label": "page_fan_adds_unique"
+              },
+              {
+                "id": "page_fans_by_like_source",
+                "label": "page_fans_by_like_source"
+              },
+              {
+                "id": "page_fans_by_like_source_unique",
+                "label": "page_fans_by_like_source_unique"
+              },
+              {
+                "id": "page_fan_removes",
+                "label": "page_fan_removes"
+              },
+              {
+                "id": "page_fan_removes_unique",
+                "label": "page_fan_removes_unique"
+              },
+              {
+                "id": "page_fans_by_unlike_source_unique",
+                "label": "page_fans_by_unlike_source_unique"
+              },
+              {
+                "id": "page_video_views",
+                "label": "page_video_views"
+              },
+              {
+                "id": "page_video_views_paid",
+                "label": "page_video_views_paid"
+              },
+              {
+                "id": "page_video_views_organic",
+                "label": "page_video_views_organic"
+              },
+              {
+                "id": "page_video_views_by_paid_non_paid",
+                "label": "page_video_views_by_paid_non_paid"
+              },
+              {
+                "id": "page_video_views_autoplayed",
+                "label": "page_video_views_autoplayed"
+              },
+              {
+                "id": "page_video_views_click_to_play",
+                "label": "page_video_views_click_to_play"
+              },
+              {
+                "id": "page_video_views_unique",
+                "label": "page_video_views_unique"
+              },
+              {
+                "id": "page_video_repeat_views",
+                "label": "page_video_repeat_views"
+              },
+              {
+                "id": "page_video_complete_views_30s",
+                "label": "page_video_complete_views_30s"
+              },
+              {
+                "id": "page_video_complete_views_30s_paid",
+                "label": "page_video_complete_views_30s_paid"
+              },
+              {
+                "id": "page_video_complete_views_30s_organic",
+                "label": "page_video_complete_views_30s_organic"
+              },
+              {
+                "id": "page_video_complete_views_30s_autoplayed",
+                "label": "page_video_complete_views_30s_autoplayed"
+              },
+              {
+                "id": "page_video_complete_views_30s_click_to_play",
+                "label": "page_video_complete_views_30s_click_to_play"
+              },
+              {
+                "id": "page_video_complete_views_30s_unique",
+                "label": "page_video_complete_views_30s_unique"
+              },
+              {
+                "id": "page_video_complete_views_30s_repeat_views",
+                "label": "page_video_complete_views_30s_repeat_views"
+              },
+              {
+                "id": "post_video_complete_views_30s_autoplayed",
+                "label": "post_video_complete_views_30s_autoplayed"
+              },
+              {
+                "id": "post_video_complete_views_30s_clicked_to_play",
+                "label": "post_video_complete_views_30s_clicked_to_play"
+              },
+              {
+                "id": "post_video_complete_views_30s_organic",
+                "label": "post_video_complete_views_30s_organic"
+              },
+              {
+                "id": "post_video_complete_views_30s_paid",
+                "label": "post_video_complete_views_30s_paid"
+              },
+              {
+                "id": "post_video_complete_views_30s_unique",
+                "label": "post_video_complete_views_30s_unique"
+              },
+              {
+                "id": "page_video_views_10s",
+                "label": "page_video_views_10s"
+              },
+              {
+                "id": "page_video_views_10s_paid",
+                "label": "page_video_views_10s_paid"
+              },
+              {
+                "id": "page_video_views_10s_organic",
+                "label": "page_video_views_10s_organic"
+              },
+              {
+                "id": "page_video_views_10s_autoplayed",
+                "label": "page_video_views_10s_autoplayed"
+              },
+              {
+                "id": "page_video_views_10s_click_to_play",
+                "label": "page_video_views_10s_click_to_play"
+              },
+              {
+                "id": "page_video_views_10s_unique",
+                "label": "page_video_views_10s_unique"
+              },
+              {
+                "id": "page_video_views_10s_repeat",
+                "label": "page_video_views_10s_repeat"
+              },
+              {
+                "id": "page_video_view_time",
+                "label": "page_video_view_time"
+              },
+              {
+                "id": "page_views_total",
+                "label": "page_views_total"
+              },
+              {
+                "id": "page_views_logout",
+                "label": "page_views_logout"
+              },
+              {
+                "id": "page_views_logged_in_total",
+                "label": "page_views_logged_in_total"
+              },
+              {
+                "id": "page_views_logged_in_unique",
+                "label": "page_views_logged_in_unique"
+              },
+              {
+                "id": "page_views_external_referrals",
+                "label": "page_views_external_referrals"
+              },
+              {
+                "id": "page_views_by_profile_tab_total",
+                "label": "page_views_by_profile_tab_total"
+              },
+              {
+                "id": "page_views_by_profile_tab_logged_in_unique",
+                "label": "page_views_by_profile_tab_logged_in_unique"
+              },
+              {
+                "id": "page_views_by_internal_referer_logged_in_unique",
+                "label": "page_views_by_internal_referer_logged_in_unique"
+              },
+              {
+                "id": "page_views_by_site_logged_in_unique",
+                "label": "page_views_by_site_logged_in_unique"
+              },
+              {
+                "id": "page_views_by_age_gender_logged_in_unique",
+                "label": "page_views_by_age_gender_logged_in_unique"
+              },
+              {
+                "id": "page_views_by_referers_logged_in_unique",
+                "label": "page_views_by_referers_logged_in_unique"
+              },
+              {
+                "id": "post_video_avg_time_watched",
+                "label": "post_video_avg_time_watched"
+              },
+              {
+                "id": "post_video_complete_views_organic",
+                "label": "post_video_complete_views_organic"
+              },
+              {
+                "id": "post_video_complete_views_organic_unique",
+                "label": "post_video_complete_views_organic_unique"
+              },
+              {
+                "id": "post_video_complete_views_paid",
+                "label": "post_video_complete_views_paid"
+              },
+              {
+                "id": "post_video_complete_views_paid_unique",
+                "label": "post_video_complete_views_paid_unique"
+              },
+              {
+                "id": "post_video_retention_graph",
+                "label": "post_video_retention_graph"
+              },
+              {
+                "id": "post_video_retention_graph_clicked_to_play",
+                "label": "post_video_retention_graph_clicked_to_play"
+              },
+              {
+                "id": "post_video_retention_graph_autoplayed",
+                "label": "post_video_retention_graph_autoplayed"
+              },
+              {
+                "id": "post_video_views_organic",
+                "label": "post_video_views_organic"
+              },
+              {
+                "id": "post_video_views_organic_unique",
+                "label": "post_video_views_organic_unique"
+              },
+              {
+                "id": "post_video_views_paid",
+                "label": "post_video_views_paid"
+              },
+              {
+                "id": "post_video_views_paid_unique",
+                "label": "post_video_views_paid_unique"
+              },
+              {
+                "id": "post_video_length",
+                "label": "post_video_length"
+              },
+              {
+                "id": "post_video_views",
+                "label": "post_video_views"
+              },
+              {
+                "id": "post_video_views_unique",
+                "label": "post_video_views_unique"
+              },
+              {
+                "id": "post_video_views_autoplayed",
+                "label": "post_video_views_autoplayed"
+              },
+              {
+                "id": "post_video_views_clicked_to_play",
+                "label": "post_video_views_clicked_to_play"
+              },
+              {
+                "id": "post_video_views_15s",
+                "label": "post_video_views_15s"
+              },
+              {
+                "id": "post_video_views_60s_excludes_shorter",
+                "label": "post_video_views_60s_excludes_shorter"
+              },
+              {
+                "id": "post_video_views_10s",
+                "label": "post_video_views_10s"
+              },
+              {
+                "id": "post_video_views_10s_unique",
+                "label": "post_video_views_10s_unique"
+              },
+              {
+                "id": "post_video_views_10s_autoplayed",
+                "label": "post_video_views_10s_autoplayed"
+              },
+              {
+                "id": "post_video_views_10s_clicked_to_play",
+                "label": "post_video_views_10s_clicked_to_play"
+              },
+              {
+                "id": "post_video_views_10s_organic",
+                "label": "post_video_views_10s_organic"
+              },
+              {
+                "id": "post_video_views_10s_paid",
+                "label": "post_video_views_10s_paid"
+              },
+              {
+                "id": "post_video_views_10s_sound_on",
+                "label": "post_video_views_10s_sound_on"
+              },
+              {
+                "id": "post_video_views_sound_on",
+                "label": "post_video_views_sound_on"
+              },
+              {
+                "id": "post_video_view_time",
+                "label": "post_video_view_time"
+              },
+              {
+                "id": "post_video_view_time_organic",
+                "label": "post_video_view_time_organic"
+              },
+              {
+                "id": "post_video_view_time_by_age_bucket_and_gender",
+                "label": "post_video_view_time_by_age_bucket_and_gender"
+              },
+              {
+                "id": "post_video_view_time_by_region_id",
+                "label": "post_video_view_time_by_region_id"
+              },
+              {
+                "id": "post_video_views_by_distribution_type",
+                "label": "post_video_views_by_distribution_type"
+              },
+              {
+                "id": "post_video_view_time_by_distribution_type",
+                "label": "post_video_view_time_by_distribution_type"
+              },
+              {
+                "id": "post_video_view_time_by_country_id",
+                "label": "post_video_view_time_by_country_id"
+              },
+              {
+                "id": "page_content_activity_by_action_type_unique",
+                "label": "page_content_activity_by_action_type_unique"
+              },
+              {
+                "id": "page_content_activity_by_age_gender_unique",
+                "label": "page_content_activity_by_age_gender_unique"
+              },
+              {
+                "id": "page_content_activity_by_city_unique",
+                "label": "page_content_activity_by_city_unique"
+              },
+              {
+                "id": "page_content_activity_by_country_unique",
+                "label": "page_content_activity_by_country_unique"
+              },
+              {
+                "id": "page_content_activity_by_locale_unique",
+                "label": "page_content_activity_by_locale_unique"
+              },
+              {
+                "id": "page_content_activity",
+                "label": "page_content_activity"
+              },
+              {
+                "id": "page_content_activity_by_action_type",
+                "label": "page_content_activity_by_action_type"
+              },
+              {
+                "id": "post_activity",
+                "label": "post_activity"
+              },
+              {
+                "id": "post_activity_unique",
+                "label": "post_activity_unique"
+              },
+              {
+                "id": "post_activity_by_action_type",
+                "label": "post_activity_by_action_type"
+              },
+              {
+                "id": "post_activity_by_action_type_unique",
+                "label": "post_activity_by_action_type_unique"
+              },
+              {
+                "id": "page_daily_video_ad_break_cpm_by_crosspost_status",
+                "label": "page_daily_video_ad_break_cpm_by_crosspost_status"
+              },
+              {
+                "id": "page_daily_video_ad_break_earnings_by_crosspost_status",
+                "label": "page_daily_video_ad_break_earnings_by_crosspost_status"
+              },
+              {
+                "id": "post_video_ad_break_ad_impressions",
+                "label": "post_video_ad_break_ad_impressions"
+              },
+              {
+                "id": "post_video_ad_break_earnings",
+                "label": "post_video_ad_break_earnings"
+              },
+              {
+                "id": "post_video_ad_break_ad_cpm",
+                "label": "post_video_ad_break_ad_cpm"
+              }
+            ]
+          }
+        },
+        {
+          "name": "period",
+          "label": "Period",
+          "widget-type": "select",
+          "widget-attributes": {
+            "default": "day",
+            "values": [
+              "day",
+              "week",
+              "days_28"
+            ]
+          }
+        },
+        {
           "name": "sorting",
           "label": "Sorting",
           "widget-type": "textbox"
@@ -1180,6 +2082,22 @@
       "show": [
         {
           "name": "accountId",
+          "type": "property"
+        }
+      ]
+    },
+    {
+      "name": "Page Id",
+      "condition": {
+        "expression": "objectType == 'Page'"
+      },
+      "show": [
+        {
+          "name": "pageId",
+          "type": "property"
+        },
+        { 
+          "name": "fields",
           "type": "property"
         }
       ]

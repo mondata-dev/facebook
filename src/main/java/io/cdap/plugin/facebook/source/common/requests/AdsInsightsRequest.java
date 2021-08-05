@@ -16,17 +16,19 @@
 
 package io.cdap.plugin.facebook.source.common.requests;
 
-import com.facebook.ads.sdk.APIException;
-import com.facebook.ads.sdk.APINodeList;
+import com.facebook.ads.sdk.AdsInsights;
 
-import io.cdap.plugin.facebook.source.common.config.BaseSourceConfig;
+import java.util.List;
 
 /**
  * Common interface for Facebook Insights requests.
  */
-public interface InsightsRequest {
-  void requestField(String fieldName);
-  void setParam(String paramName, Object value);
-  void configure(BaseSourceConfig config);
-  APINodeList<?> execute() throws APIException;
+public abstract class AdsInsightsRequest implements InsightsRequest {
+  public void setBreakdowns(List<AdsInsights.EnumBreakdowns> breakdowns) {
+    setParam("breakdowns", breakdowns);
+  }
+
+  public void setActionBreakdowns(List<AdsInsights.EnumActionBreakdowns> breakdowns) {
+    setParam("action_breakdowns", breakdowns);
+  }
 }

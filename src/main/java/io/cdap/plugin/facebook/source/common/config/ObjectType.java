@@ -25,7 +25,8 @@ public enum ObjectType {
   Campaign("Campaign"),
   Ad("Ad"),
   AdSet("Ad Set"),
-  Account("Account");
+  Account("Account"),
+  Page("Page");
 
   private String stringValue;
 

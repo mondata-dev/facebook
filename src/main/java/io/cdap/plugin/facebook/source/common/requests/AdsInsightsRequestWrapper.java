@@ -25,16 +25,17 @@ import com.facebook.ads.sdk.AdSet;
 import com.facebook.ads.sdk.AdsInsights;
 import com.facebook.ads.sdk.Campaign;
 
-import java.util.List;
+import io.cdap.plugin.facebook.source.common.config.BaseSourceConfig;
+import io.cdap.plugin.facebook.source.common.config.Breakdowns;
 
 /**
  * Wraps one of the following requests: {@link Campaign.APIRequestGetInsights}, {@link Ad.APIRequestGetInsights},
- * {@link AdSet.APIRequestGetInsights}, {@link AdAccount.APIRequestGetInsights}.
+ * {@link AdSet.APIRequestGetInsights}, {@link AdAccount.APIRequestGetInsights}, {@link Page.APIRequestGetInsights}.
  */
-public class InsightsRequestWrapper implements InsightsRequest {
+public class AdsInsightsRequestWrapper extends AdsInsightsRequest {
   private APIRequest<AdsInsights> request;
 
-  InsightsRequestWrapper(APIRequest<AdsInsights> request) {
+  AdsInsightsRequestWrapper(APIRequest<AdsInsights> request) {
     this.request = request;
   }
 
@@ -49,13 +50,17 @@ public class InsightsRequestWrapper implements InsightsRequest {
   }
 
   @Override
-  public void setBreakdowns(List<AdsInsights.EnumBreakdowns> breakdowns) {
-    setParam("breakdowns", breakdowns);
-  }
+  public void configure(BaseSourceConfig config) {
+    Breakdowns breakdowns = config.getBreakdown();
 
-  @Override
-  public void setActionBreakdowns(List<AdsInsights.EnumActionBreakdowns> breakdowns) {
-    setParam("action_breakdowns", breakdowns);
+    if (breakdowns != null) {
+      if (!breakdowns.getBreakdowns().isEmpty()) {
+        setBreakdowns(breakdowns.getBreakdowns());
+      }
+      if (!breakdowns.getActionBreakdowns().isEmpty()) {
+        setActionBreakdowns(breakdowns.getActionBreakdowns());
+      }
+    }
   }
 
   @Override

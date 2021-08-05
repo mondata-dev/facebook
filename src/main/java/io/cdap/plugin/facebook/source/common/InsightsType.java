@@ -14,19 +14,27 @@
  * the License.
  */
 
-package io.cdap.plugin.facebook.source.common.requests;
+package io.cdap.plugin.facebook.source.common;
 
-import com.facebook.ads.sdk.APIException;
-import com.facebook.ads.sdk.APINodeList;
-
-import io.cdap.plugin.facebook.source.common.config.BaseSourceConfig;
+import com.facebook.ads.sdk.AdsInsights;
+import com.facebook.ads.sdk.InsightsResult;
 
 /**
- * Common interface for Facebook Insights requests.
+ * Base class for insight types
  */
-public interface InsightsRequest {
-  void requestField(String fieldName);
-  void setParam(String paramName, Object value);
-  void configure(BaseSourceConfig config);
-  APINodeList<?> execute() throws APIException;
+public class InsightsType {
+  public AdsInsights    adsInsight;
+  public InsightsResult insightsResult;
+
+  public Class type;
+
+  public InsightsType(AdsInsights insights) {
+    adsInsight = insights;
+    type = insights.getClass();
+  }
+
+  public InsightsType(InsightsResult insights) {
+    insightsResult = insights;
+    type = insights.getClass();
+  }
 }
